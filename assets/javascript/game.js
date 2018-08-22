@@ -4,6 +4,7 @@ var gameStarted = false;
 
 var possibleWords = ["cat", "dog"];
 var guesses = [];
+var wrongGuesses = [];
 var guessesLeft = 6;
 var currentWord = "";
 var numBlanks = 0;
@@ -17,14 +18,26 @@ document.onkeyup = function (event) {
         console.log("Game is already under way");
         console.log("The word is: " + currentWord);
 
+        // Check for legal letter guess
+        console.log(event.keyCode);
+        if (event.keyCode < 65 || event.keyCode > 90) {
+            // key is NOT alphabetical, return early
+            console.log("NOT A LETTER ERIC!")
+        }
 
-        // Once word is chosen, enter an infinite loop of waiting for use guesses
+        // Check for letter already guessed, return early if so
 
-        // On guess, check to see if it's correct or not
+        // See if letter is in chosen word
 
-        // Display updated word if it's right, add guess to wrong answers if it's wrong
+        // If so, update word, and check for win
 
-        // Am I out of guesses? If so, end game
+        // If not, decrement guesses, add letter to wrong guesses
+
+
+        // TODO: Restart the game, update wins/losses
+
+
+
 
     } else {
         beginGame();
