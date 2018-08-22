@@ -2,10 +2,12 @@ console.log("I am linked!");
 
 var gameStarted = false;
 
+var gameOver = false;
+
 var possibleWords = ["cheesesteak", "dog"];
 var guesses = [];
 var wrongGuesses = [];
-var guessesLeft = 6;
+var guessesLeft = 3;
 var currentWord = "";
 var numBlanks = 0;
 var wordInProgress = "";
@@ -14,6 +16,11 @@ var losses = 0;
 
 // listen for a key to start the game
 document.onkeyup = function (event) {
+    if(gameOver) {
+        console.log("GAME OVER");
+        return;
+    }
+
     if (gameStarted) {
         console.log("Game is already under way");
         console.log("The word is: " + currentWord);
@@ -51,16 +58,22 @@ document.onkeyup = function (event) {
         } else {
             wrongGuesses.push(event.key);
             guessesLeft--;
-
             // Update the screen
             document.getElementById("lettersguessed").textContent = wrongGuesses.join("");
             document.getElementById("guesses").textContent = guessesLeft;
-
         }
 
-        // If so, update word, and check for win
+        // Check for a loss
+        if (guessesLeft < 1) {
+            document.getElementById("gameinfo").textContent = "GAME OVER!";
+            gameOver = true;
+        }
 
-        // If not, decrement guesses, add letter to wrong guesses
+        // Check for a win
+        if (wordInProgress.indexOf("_") === -1) {
+            document.getElementById("gameinfo").textContent = "GAME OVER -- YOU WON NICE JOB :)!";
+            gameOver = true;
+        }
 
 
         // TODO: Restart the game, update wins/losses
