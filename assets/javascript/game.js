@@ -2,7 +2,7 @@ console.log("I am linked!");
 
 var gameStarted = false;
 
-var possibleWords = ["cat", "dog"];
+var possibleWords = ["cheesesteak", "dog"];
 var guesses = [];
 var wrongGuesses = [];
 var guessesLeft = 6;
@@ -39,7 +39,15 @@ document.onkeyup = function (event) {
         // See if letter is in chosen word
         if (currentWord.indexOf(event.key) > -1) {
             console.log("Correct guess!");
-            // TODO: Update dashes with correct letter
+
+            // Update dashes with correct letter
+            for(var i = 0; i < currentWord.length; i++) {
+                if(currentWord[i] === event.key) {
+                    console.log("Matching letter at index: " + i);
+                    wordInProgress[i] = event.key;
+                }
+            }
+            document.getElementById("currentword").textContent = wordInProgress.join("");
         } else {
             wrongGuesses.push(event.key);
             guessesLeft--;
