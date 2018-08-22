@@ -3,8 +3,11 @@ console.log("I am linked!");
 var gameStarted = false;
 
 var possibleWords = ["cat", "dog"];
+var guesses = [];
 var guessesLeft = 6;
 var currentWord = "";
+var numBlanks = 0;
+var wordInProgress = "";
 var wins = 0;
 var losses = 0;
 
@@ -12,13 +15,8 @@ var losses = 0;
 document.onkeyup = function (event) {
     if (gameStarted) {
         console.log("Game is already under way");
-        // Once the game is started:
+        console.log("The word is: " + currentWord);
 
-        // Array of words to choose from
-        // Set guesses to [number]
-        // Set wins/losses/games played
-
-        // Pick a random word
 
         // Once word is chosen, enter an infinite loop of waiting for use guesses
 
@@ -38,6 +36,30 @@ function beginGame() {
     console.log("The game has started!");
     document.getElementById("gameinfo").textContent = "The game has started!";
     gameStarted = true;
+    // pick a random word, and store it in currentWord
+    currentWord = possibleWords[0]; // TODO: Use a random number here
+    numBlanks = currentWord.length;
+
+    wordInProgress = currentWord.split('');
+
+    for (var i = 0; i < wordInProgress.length; i++) {
+        wordInProgress[i] = "_";
+    }
+
+    console.log(wordInProgress);
+
+    console.log(wordInProgress.join(""));
+
+    // TODO: Find way to add spaces between underscores for game
+
+    document.getElementById("currentword").textContent = wordInProgress.join("");
+    document.getElementById("guesses").textContent = guessesLeft;
+
+
+
+    // display hashes on the screen
+
+
 }
 
 
