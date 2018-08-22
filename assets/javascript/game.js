@@ -19,15 +19,36 @@ document.onkeyup = function (event) {
         console.log("The word is: " + currentWord);
 
         // Check for legal letter guess
-        console.log(event.keyCode);
         if (event.keyCode < 65 || event.keyCode > 90) {
             // key is NOT alphabetical, return early
-            console.log("NOT A LETTER ERIC!")
+            console.log("NOT A LETTER ERIC!");
+            return;
         }
 
         // Check for letter already guessed, return early if so
+        console.log(event.key);
+        if (guesses.indexOf(event.key) > -1) {
+            console.log("ALREADY GUESSED ERIC!");
+            return;
+        }
+
+        // Push letter to guesses array
+        guesses.push(event.key);
+        console.log(guesses);
 
         // See if letter is in chosen word
+        if (currentWord.indexOf(event.key) > -1) {
+            console.log("Correct guess!");
+            // TODO: Update dashes with correct letter
+        } else {
+            wrongGuesses.push(event.key);
+            guessesLeft--;
+
+            // Update the screen
+            document.getElementById("lettersguessed").textContent = wrongGuesses.join("");
+            document.getElementById("guesses").textContent = guessesLeft;
+
+        }
 
         // If so, update word, and check for win
 
